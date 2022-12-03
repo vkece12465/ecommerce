@@ -1,7 +1,8 @@
 import mongoose from 'mongoose'
 import authRoles from "../utils/authRoles"
+import config from "../config/index"
 
-//iImporting Libraries
+//Importing Libraries
 import bcrypt from "bcryptjs"
 import JWT from "jsonwebtoken"
 import crypto from "crypto"
@@ -48,4 +49,25 @@ userSchema.pre("save", async function(next) {
     next()
 })
 
+// User Schema Methods
+userSchema.methods = {
+    // Compare password
+    comparePassword: async function(userEnterPassword){
+        return await bcrypt.compare(userEnterPassword, this.password)
+    },
+
+    // JWT Token
+    jwtToken: function() {
+        return JWT.sign(
+            {
+                _id: this._id,
+                name: this.name
+            },
+            config.JWT_SECRET,
+            {
+                expiresIn: config.JWT_EXPIRY
+            }
+        )
+    }
+}
 export default mongoose.model("User", userSchema)
