@@ -11,9 +11,9 @@ const couponSchema = new mongoose.Schema(
             default: 0
         },
         
-            active: {
-                type: Boolean,
-                default: true
+        active: {
+            type: Boolean,
+            default: true
             }
         
     },
