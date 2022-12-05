@@ -32,7 +32,7 @@ const userSchema = mongoose.Schema(
             default: authRoles.USER
         },
         forgotPasswordToken: String,
-        forgotpasswordExpiry: Date,
+        forgotPasswordExpiry: Date,
 
     },
     // Time Stamps
@@ -81,7 +81,7 @@ userSchema.methods = {
         .digest('hex')
 
         // Update Date
-        this.forgotpasswordExpiry = Date.now() + 20 * 60 * 1000
+        this.forgotPasswordExpiry = Date.now() + 20 * 60 * 1000
         return forgotToken;
     }
 
