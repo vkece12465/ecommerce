@@ -2,11 +2,13 @@ import nodemailer from 'nodemailer';
 import config from './index'
 
 const mailTransport = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    port: 587,
+    host: config.SMTP_MAIL_HOST,
+    port: config.SMTP_MAIL_PORT,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: testAccount.user, // generated ethereal user
-      pass: testAccount.pass, // generated ethereal password
+      user: config.SMTP_MAIL_USERNAME, // generated ethereal user
+      pass: config.SMTP_MAIL_PASSWORD, // generated ethereal password
     },
   });
+
+  export default mailTransport;
