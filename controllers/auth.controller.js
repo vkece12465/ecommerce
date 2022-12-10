@@ -1,7 +1,8 @@
 import User from './../models/user.schema';
 import asyncHandler from './../services/asyncHandler';
 import customError from './../utils/customError';
-import mailHelper from './../utils/mailHelper'
+import mailHelper from './../utils/mailHelper';
+import crypto from 'crypto';
 
 export const cookieOptions = {
     expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
@@ -174,7 +175,7 @@ export const forgotPassword = asyncHandler(async (req, res) => {
  * @RESET_PASSWORD
  * @Route http://localhost:4000/api/auth/passwords/reset/:resetPasswordToken
  * @Description User can able to reset a password based on url token
- * @Parameter tokrn from url, password and confirm password
+ * @Parameter token from url, password and confirm password
  * @Returns user Object
  ***********************/
 
@@ -220,3 +221,24 @@ export const resetPassword = asyncHandler (async (req, res) => {
 })
 
 // Need to create a change password method
+
+/***********************
+ * @GET_PROFILE
+ * @REQUEST_TYPE GET
+ * @Route http://localhost:4000/api/auth/profile
+ * @Description check token and populate user
+ * @Parameter 
+ * @Returns user Object
+ ***********************/
+
+export const getProfile = asyncHandler(async (req, res) => {
+    const {user} = req
+    if(!user){
+        throw new customError("User is not found", 404)
+    }
+    res.status(200).json({
+        success: true,
+        message: "user found",
+        user
+    })
+})
