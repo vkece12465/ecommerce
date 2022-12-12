@@ -16,7 +16,12 @@ const userSchema = mongoose.Schema(
             trim: true
         },
         email:{
-            type: ["[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"],
+            type: String,
+            validate: {
+                validator: function(validate){
+                    return /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(validate);
+                }
+            },
             required: ["true", "Email is required"],
             unique: true,
         },
