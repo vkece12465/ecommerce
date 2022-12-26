@@ -13,7 +13,10 @@ const dotenv = {
     SMTP_MAIL_PASSWORD: process.env.SMTP_MAIL_PASSWORD,
     SMTP_MAIL_EMAIL: process.env.SMTP_MAIL_EMAIL,
 
-
+    S3_ACCESS_KEY: process.env.S3_ACCESS_KEY,
+    S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY,
+    S3_BUCKET: process.env.S3_BUCKET,
+    S3_REGION: process.env.S3_REGION
 
 
 }
